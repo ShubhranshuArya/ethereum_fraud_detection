@@ -8,11 +8,7 @@ from src.feature_engineering import (
 
 
 @step
-def feature_engineering_step(
-    df: pd.DataFrame,
-    target_column: str,
-    features: list = [],
-) -> pd.DataFrame:
+def feature_engineering_step(df: pd.DataFrame) -> pd.DataFrame:
     """
     Applies feature engineering transformations to the input DataFrame as a ZenML Step.
 
@@ -24,9 +20,7 @@ def feature_engineering_step(
     """
 
     feature_engineering_handler = FeatureEngineeringHandler(
-        NormalizeFeatureEngineeringStrategy(features)
+        NormalizeFeatureEngineeringStrategy()
     )
-    feature_engineered = feature_engineering_handler.apply_transformation(
-        df, target_column
-    )
+    feature_engineered = feature_engineering_handler.apply_transformation(df)
     return feature_engineered
